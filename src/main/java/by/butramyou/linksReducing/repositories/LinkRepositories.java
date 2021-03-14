@@ -1,7 +1,10 @@
 package by.butramyou.linksReducing.repositories;
 
-import by.butramyou.linksReducing.web.controller.model.LinkDto;
+import by.butramyou.linksReducing.web.model.Link;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LinkRepositories extends JpaRepository<LinkDto, String> {
+/**
+ * @author D.Butramyou
+ */
+public interface LinkRepositories extends JpaRepository<Link, String> {
 }
