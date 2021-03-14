@@ -3,7 +3,6 @@ package by.butramyou.linksReducing.web.controller;
 import by.butramyou.linksReducing.service.LinkService;
 import by.butramyou.linksReducing.web.model.Link;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -45,7 +44,6 @@ class LinkControllerTest {
         .andExpect(jsonPath("$.originalLink", is("https://www.google.com/")));
   }
 
-  @Ignore
   @Test
   void saveNewLink() throws Exception {
     mockMvc.perform(post("/api/v1/")
