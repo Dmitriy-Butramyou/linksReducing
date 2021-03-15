@@ -31,7 +31,7 @@ public class LinkServiceImpl implements LinkService {
       log.info("Object with id: " + id + " didn't found");
       throw new ObjectNotFoundException("Object with id: " + id + " didn't found");
     }
-    log.info("Found an object with id: " + id + " and originalLink:" + link.get().getOriginalLink());
+    log.info("Found an object with id: " + id + " and originalLink: " + link.get().getOriginalLink());
     return link.get();
   }
 
@@ -49,24 +49,18 @@ public class LinkServiceImpl implements LinkService {
 
   /**
    * Generating unique id
-   * For id used first 7 signs from UUID
+   * For id used first 8 signs from UUID
    *
    * @return unique id
    */
   private String getUniqueId() {
-    String id = "";
-    boolean isUniqueId = false;
-
+    String id;
     long start = new Date().getTime();
-    while (!isUniqueId) {
+
+    do {
       id = UUID.randomUUID().toString().substring(0, 8);
-      isUniqueId = linkRepositories.findById(id).isEmpty();
-      if (!isUniqueId) {
-        log.info("Id is not unique " + id);
-      } else {
-        log.info("Found an unique id: " + id + " in " + (new Date().getTime() - start) + " milliseconds");
-      }
-    }
+    } while (linkRepositories.findById(id).isPresent());
+    log.info("Found an unique id: " + id + " in " + (new Date().getTime() - start) + " milliseconds");
 
     return id;
   }

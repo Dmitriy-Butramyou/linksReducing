@@ -2,6 +2,7 @@ package by.butramyou.linksReducing.web.controller;
 
 import by.butramyou.linksReducing.service.LinkService;
 import by.butramyou.linksReducing.web.model.Link;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author D.Butramyou
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/")
 public class LinkController {
@@ -51,6 +53,7 @@ public class LinkController {
       Link newLink = linkService.saveNewLink(url);
       return new ResponseEntity<Link>(newLink, HttpStatus.CREATED);
     } else {
+      log.error("Url isn't valid: " + url);
       return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
   }
